@@ -1098,6 +1098,11 @@ ip-192-168-25-250.ap-south-1.compute.internal   Ready    <none>   115m   v1.34.8
 ip-192-168-47-101.ap-south-1.compute.internal   Ready    <none>   115m   v1.34.8-eks-3385e9b
 ```
 
+```
+PS C:\Users\abhis\Harika\K8s\Class> kubectl get services --watch
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.100.0.1   <none>        443/TCP   124m
 
+```
 
 
