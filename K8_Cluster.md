@@ -19,7 +19,75 @@ Create Cluster:
 eksctl create cluster --name sample-cluster-3 --region ap-south-1 --nodegroup-name standard-workers --node-type t3.medium --nodes 2 --nodes-min 2 --nodes-max 3
 ```
 > <img width="729" height="354" alt="image" src="https://github.com/user-attachments/assets/9ba76965-ac8c-4bde-8234-e53ff657c2bd" />
-
+```
+PS C:\Users\abhis\Harika\K8s\Class> eksctl create cluster --name sample-cluster-3 --region ap-south-1 --nodegroup-name standard-workers --node-type t3.medium --nodes 2 --nodes-min 2 --nodes-max 3
+2026-06-07 11:18:16 [ℹ]  eksctl version 0.226.0
+2026-06-07 11:18:16 [ℹ]  using region ap-south-1
+2026-06-07 11:18:16 [ℹ]  setting availability zones to [ap-south-1a ap-south-1b ap-south-1c]
+2026-06-07 11:18:16 [ℹ]  subnets for ap-south-1a - public:192.168.0.0/19 private:192.168.96.0/19
+2026-06-07 11:18:16 [ℹ]  subnets for ap-south-1b - public:192.168.32.0/19 private:192.168.128.0/19
+2026-06-07 11:18:16 [ℹ]  subnets for ap-south-1c - public:192.168.64.0/19 private:192.168.160.0/19
+2026-06-07 11:18:16 [ℹ]  nodegroup "standard-workers" will use "" [AmazonLinux2023/1.34]
+2026-06-07 11:18:16 [!]  Auto Mode will be enabled by default in an upcoming release of eksctl. This means managed node groups and managed networking add-ons will no longer be created by default. To maintain current behavior, explicitly set 'autoModeConfig.enabled: false' in your cluster configuration. Learn more: https://eksctl.io/usage/auto-mode/
+2026-06-07 11:18:16 [ℹ]  using Kubernetes version 1.34
+2026-06-07 11:18:16 [ℹ]  creating EKS cluster "sample-cluster-3" in "ap-south-1" region with managed nodes
+2026-06-07 11:18:16 [ℹ]  will create 2 separate CloudFormation stacks for cluster itself and the initial managed nodegroup
+2026-06-07 11:18:16 [ℹ]  if you encounter any issues, check CloudFormation console or try 'eksctl utils describe-stacks --region=ap-south-1 --cluster=sample-cluster-3'
+2026-06-07 11:18:16 [ℹ]  Kubernetes API endpoint access will use default of {publicAccess=true, privateAccess=false} for cluster "sample-cluster-3" in "ap-south-1"
+2026-06-07 11:18:16 [ℹ]  CloudWatch logging will not be enabled for cluster "sample-cluster-3" in "ap-south-1"
+2026-06-07 11:18:16 [ℹ]  you can enable it with 'eksctl utils update-cluster-logging --enable-types={SPECIFY-YOUR-LOG-TYPES-HERE (e.g. all)} --region=ap-south-1 --cluster=sample-cluster-3'
+2026-06-07 11:18:16 [ℹ]  default addons metrics-server, vpc-cni, kube-proxy, coredns were not specified, will install them as EKS addons
+2026-06-07 11:18:16 [ℹ]  
+2 sequential tasks: { create cluster control plane "sample-cluster-3", 
+    2 sequential sub-tasks: { 
+        2 sequential sub-tasks: { 
+            1 task: { create addons },
+            wait for control plane to become ready,
+        },
+        create managed nodegroup "standard-workers",
+    } 
+}
+2026-06-07 11:18:16 [ℹ]  building cluster stack "eksctl-sample-cluster-3-cluster"
+2026-06-07 11:18:16 [ℹ]  deploying stack "eksctl-sample-cluster-3-cluster"
+2026-06-07 11:18:46 [ℹ]  waiting for CloudFormation stack "eksctl-sample-cluster-3-cluster"
+2026-06-07 11:19:16 [ℹ]  waiting for CloudFormation stack "eksctl-sample-cluster-3-cluster"
+2026-06-07 11:20:17 [ℹ]  waiting for CloudFormation stack "eksctl-sample-cluster-3-cluster"
+2026-06-07 11:21:17 [ℹ]  waiting for CloudFormation stack "eksctl-sample-cluster-3-cluster"
+2026-06-07 11:22:17 [ℹ]  waiting for CloudFormation stack "eksctl-sample-cluster-3-cluster"
+2026-06-07 11:23:17 [ℹ]  waiting for CloudFormation stack "eksctl-sample-cluster-3-cluster"
+2026-06-07 11:24:17 [ℹ]  waiting for CloudFormation stack "eksctl-sample-cluster-3-cluster"
+2026-06-07 11:25:17 [ℹ]  waiting for CloudFormation stack "eksctl-sample-cluster-3-cluster"
+2026-06-07 11:26:18 [ℹ]  waiting for CloudFormation stack "eksctl-sample-cluster-3-cluster"
+2026-06-07 11:26:19 [!]  recommended policies were found for "vpc-cni" addon, but since OIDC is disabled on the cluster, eksctl cannot configure the requested permissions; the recommended way to provide IAM permissions for "vpc-cni" addon is via pod identity associations; after addon creation is completed, add all recommended policies to the config file, under `addon.PodIdentityAssociations`, and run `eksctl update addon`
+2026-06-07 11:26:19 [ℹ]  creating addon: vpc-cni
+2026-06-07 11:26:20 [ℹ]  successfully created addon: vpc-cni
+2026-06-07 11:26:20 [ℹ]  creating addon: kube-proxy
+2026-06-07 11:26:21 [ℹ]  successfully created addon: kube-proxy
+2026-06-07 11:26:21 [ℹ]  creating addon: coredns
+2026-06-07 11:26:21 [ℹ]  successfully created addon: coredns
+2026-06-07 11:28:22 [ℹ]  building managed nodegroup stack "eksctl-sample-cluster-3-nodegroup-standard-workers"
+2026-06-07 11:28:23 [ℹ]  deploying stack "eksctl-sample-cluster-3-nodegroup-standard-workers"
+2026-06-07 11:28:23 [ℹ]  waiting for CloudFormation stack "eksctl-sample-cluster-3-nodegroup-standard-workers"
+2026-06-07 11:28:53 [ℹ]  waiting for CloudFormation stack "eksctl-sample-cluster-3-nodegroup-standard-workers"
+2026-06-07 11:29:52 [ℹ]  waiting for CloudFormation stack "eksctl-sample-cluster-3-nodegroup-standard-workers"
+2026-06-07 11:31:50 [ℹ]  waiting for CloudFormation stack "eksctl-sample-cluster-3-nodegroup-standard-workers"
+2026-06-07 11:31:50 [ℹ]  waiting for the control plane to become ready
+2026-06-07 11:31:51 [✔]  saved kubeconfig as "C:\\Users\\abhis\\.kube\\config"
+2026-06-07 11:31:51 [ℹ]  no tasks
+2026-06-07 11:31:51 [✔]  all EKS cluster resources for "sample-cluster-3" have been created
+2026-06-07 11:31:51 [ℹ]  nodegroup "standard-workers" has 2 node(s)
+2026-06-07 11:31:51 [ℹ]  node "ip-192-168-25-250.ap-south-1.compute.internal" is ready
+2026-06-07 11:31:51 [ℹ]  node "ip-192-168-47-101.ap-south-1.compute.internal" is ready
+2026-06-07 11:31:51 [ℹ]  waiting for at least 2 node(s) to become ready in "standard-workers"
+2026-06-07 11:31:51 [ℹ]  nodegroup "standard-workers" has 2 node(s)
+2026-06-07 11:31:51 [ℹ]  node "ip-192-168-25-250.ap-south-1.compute.internal" is ready
+2026-06-07 11:31:51 [ℹ]  node "ip-192-168-47-101.ap-south-1.compute.internal" is ready
+2026-06-07 11:31:51 [✔]  created 1 managed nodegroup(s) in cluster "sample-cluster-3"
+2026-06-07 11:31:51 [ℹ]  creating addon: metrics-server
+2026-06-07 11:31:51 [ℹ]  successfully created addon: metrics-server
+2026-06-07 11:31:53 [ℹ]  kubectl command should work with "C:\\Users\\abhis\\.kube\\config", try 'kubectl get nodes'
+2026-06-07 11:31:53 [✔]  EKS cluster "sample-cluster-3" in "ap-south-1" region is ready
+```
 
 
 Configuring the kubectl with eks cluster:
