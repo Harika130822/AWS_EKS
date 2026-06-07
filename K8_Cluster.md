@@ -1106,5 +1106,39 @@ NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
 kubernetes   ClusterIP   10.100.0.1   <none>        443/TCP   124m
 
 ```
+- Deletion
+
+```
+PS C:\Users\abhis\Harika\K8s\Class> eksctl delete cluster --name sample-cluster-3 --region ap-south-1
+2026-06-07 13:28:45 [ℹ]  deleting EKS cluster "sample-cluster-3"
+2026-06-07 13:28:46 [ℹ]  will drain 0 unmanaged nodegroup(s) in cluster "sample-cluster-3"
+2026-06-07 13:28:46 [ℹ]  starting parallel draining, max in-flight of 1
+2026-06-07 13:28:46 [ℹ]  deleted 0 Fargate profile(s)
+2026-06-07 13:28:47 [✔]  kubeconfig has been updated
+2026-06-07 13:28:47 [ℹ]  cleaning up AWS load balancers created by Kubernetes objects of Kind Service, Ingress, or Gateway
+2026-06-07 13:29:19 [ℹ]  
+2 sequential tasks: { delete nodegroup "standard-workers", delete cluster control plane "sample-cluster-3" [async] 
+}
+2026-06-07 13:29:19 [ℹ]  will delete stack "eksctl-sample-cluster-3-nodegroup-standard-workers"
+2026-06-07 13:29:19 [ℹ]  waiting for stack "eksctl-sample-cluster-3-nodegroup-standard-workers" to get deleted
+2026-06-07 13:29:19 [ℹ]  waiting for CloudFormation stack "eksctl-sample-cluster-3-nodegroup-standard-workers"
+2026-06-07 13:29:49 [ℹ]  waiting for CloudFormation stack "eksctl-sample-cluster-3-nodegroup-standard-workers"
+2026-06-07 13:30:27 [ℹ]  waiting for CloudFormation stack "eksctl-sample-cluster-3-nodegroup-standard-workers"
+2026-06-07 13:32:26 [ℹ]  waiting for CloudFormation stack "eksctl-sample-cluster-3-nodegroup-standard-workers"
+2026-06-07 13:33:29 [ℹ]  waiting for CloudFormation stack "eksctl-sample-cluster-3-nodegroup-standard-workers"
+2026-06-07 13:35:26 [ℹ]  waiting for CloudFormation stack "eksctl-sample-cluster-3-nodegroup-standard-workers"
+2026-06-07 13:36:39 [ℹ]  waiting for CloudFormation stack "eksctl-sample-cluster-3-nodegroup-standard-workers"
+2026-06-07 13:36:39 [ℹ]  will delete stack "eksctl-sample-cluster-3-cluster"
+2026-06-07 13:36:40 [✔]  all cluster resources were deleted
+PS C:\Users\abhis\Harika\K8s\Class>
+```
+
+> <img width="1798" height="400" alt="image" src="https://github.com/user-attachments/assets/71d80b5d-5fd1-4740-8f4c-b294e8d76dd2" />
+
+> <img width="1877" height="383" alt="image" src="https://github.com/user-attachments/assets/a8afb2e1-525d-4cde-b35b-eb91c2a4d43c" />
+
+> <img width="1887" height="497" alt="image" src="https://github.com/user-attachments/assets/9334eeaf-d9df-441c-8966-d56c7fc9857b" />
+
+
 
 
