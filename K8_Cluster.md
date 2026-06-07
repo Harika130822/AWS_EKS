@@ -895,5 +895,199 @@ cloudformation
 }
 ```
 
->
+get context of which cluster you are mapped currently - Docker or AWS
+```
+kubectl config get-contexts
+```
+> <img width="695" height="252" alt="image" src="https://github.com/user-attachments/assets/35a16740-d616-49da-9260-67dd8f492961" />
+```
+PS C:\Users\abhis\Harika\K8s\Class> kubectl config get-contexts
+CURRENT   NAME                                                           CLUSTER                                                        AUTHINFO                                                       NAMESPACE
+          admincliprac@sample-cluster-3.ap-south-1.eksctl.io             sample-cluster-3.ap-south-1.eksctl.io                          admincliprac@sample-cluster-3.ap-south-1.eksctl.io             
+*         arn:aws:eks:ap-south-1:129373676098:cluster/sample-cluster-3   arn:aws:eks:ap-south-1:129373676098:cluster/sample-cluster-3   arn:aws:eks:ap-south-1:129373676098:cluster/sample-cluster-3   
+          docker-desktop                                                 docker-desktop     
+```
+
+
+
+
+```
+PS C:\Users\abhis\Harika\K8s\Class> aws eks --region ap-south-1 update-kubeconfig --name sample-cluster-3
+Added new context arn:aws:eks:ap-south-1:129373676098:cluster/sample-cluster-3 to C:\Users\abhis\.kube\config
+PS C:\Users\abhis\Harika\K8s\Class> kubectl get nodes
+NAME                                            STATUS   ROLES    AGE     VERSION
+ip-192-168-25-250.ap-south-1.compute.internal   Ready    <none>   5m26s   v1.34.8-eks-3385e9b
+ip-192-168-47-101.ap-south-1.compute.internal   Ready    <none>   5m25s   v1.34.8-eks-3385e9b
+PS C:\Users\abhis\Harika\K8s\Class> kubectl get namespaces
+NAME              STATUS   AGE
+default           Active   11m
+kube-node-lease   Active   11m
+kube-public       Active   11m
+kube-system       Active   11m
+PS C:\Users\abhis\Harika\K8s\Class> kubectl get pods
+No resources found in default namespace.
+PS C:\Users\abhis\Harika\K8s\Class> kubectl config get-contexts
+CURRENT   NAME                                                           CLUSTER                                                        AUTHINFO                                                       NAMESPACE
+          admincliprac@sample-cluster-3.ap-south-1.eksctl.io             sample-cluster-3.ap-south-1.eksctl.io                          admincliprac@sample-cluster-3.ap-south-1.eksctl.io             
+*         arn:aws:eks:ap-south-1:129373676098:cluster/sample-cluster-3   arn:aws:eks:ap-south-1:129373676098:cluster/sample-cluster-3   arn:aws:eks:ap-south-1:129373676098:cluster/sample-cluster-3   
+          docker-desktop                                                 docker-desktop                                                 docker-desktop                                                 
+PS C:\Users\abhis\Harika\K8s\Class> kubectl apply -f .\namespace-hm.yml
+namespace/hm8 created
+PS C:\Users\abhis\Harika\K8s\Class> kubectl get namespaces             
+NAME              STATUS   AGE
+default           Active   80m
+hm8               Active   7s
+kube-node-lease   Active   80m
+kube-public       Active   80m
+kube-system       Active   80m
+PS C:\Users\abhis\Harika\K8s\Class> kubectl apply -f .\deployment-hm.yml     
+deployment.apps/nginx-deployment created
+PS C:\Users\abhis\Harika\K8s\Class> kubectl get pods -n hm8             
+NAME                                READY   STATUS    RESTARTS   AGE
+nginx-deployment-7fcc5d65bb-7s8sx   1/1     Running   0          39s
+nginx-deployment-7fcc5d65bb-kn586   1/1     Running   0          39s
+PS C:\Users\abhis\Harika\K8s\Class> kubectl applly -f .\service-n-hm.yml
+error: unknown command "applly" for "kubectl"
+
+Did you mean this?
+        apply
+PS C:\Users\abhis\Harika\K8s\Class> kubectl apply -f .\service-n-hm.yml 
+service/nginx-service created
+```
+
+### service-n-hm.yml
+```
+apiVersion: v1 
+kind: Service 
+metadata: 
+    name: nginx-service 
+    namespace: hm8
+
+spec: 
+    type: LoadBalancer #clusterIP, NodePort, LoadBalancer
+    selector: 
+        app: nginx 
+    ports: 
+        - protocol: TCP
+          port: 80 
+          targetPort: 80
+          #nodePort: 30080
+```
+
+### namespace-hm.yml
+```
+apiVersion: 'v1'
+kind: Namespace
+metadata:
+  name: hm8
+```
+
+### deployment-hm.yml
+```
+apiVersion: apps/v1 
+kind: Deployment 
+
+metadata: 
+  name: nginx-deployment
+  namespace: hm8
+  labels:
+    app: nginx
+
+spec: 
+  replicas: 2 
+  selector: 
+    matchLabels: 
+      app: nginx 
+  template: 
+    metadata: 
+      labels: 
+        app: nginx 
+    spec:
+      containers: 
+      - name: nginx-container
+        image: nginx:latest 
+        ports: 
+        - containerPort: 80 
+        resources:
+            requests:
+                cpu: "100m"
+                memory: "128Mi"
+            limits:
+                cpu: "500m"
+                memory: "256Mi"
+```
+
+
+
+```
+PS C:\Users\abhis\Harika\K8s\Class> kubectl get svc -n hm8
+NAME            TYPE           CLUSTER-IP      EXTERNAL-IP                                                               PORT(S)        AGE
+nginx-service   LoadBalancer   10.100.86.195   a65d592cf672f4262a2413dc3641e09a-100375330.ap-south-1.elb.amazonaws.com   80:30908/TCP   14s
+PS C:\Users\abhis\Harika\K8s\Class>
+PS C:\Users\abhis\Harika\K8s\Class> kubectl get pods
+No resources found in default namespace.
+PS C:\Users\abhis\Harika\K8s\Class> kubectl get pods -n hm8
+NAME                                READY   STATUS    RESTARTS   AGE
+nginx-deployment-7fcc5d65bb-7s8sx   1/1     Running   0          7m3s
+nginx-deployment-7fcc5d65bb-kn586   1/1     Running   0          7m3s
+
+#External User -> ALB URL & ALB TCP Port -> Uses the Nodeport (3xxxx) -> Connects to Service port (port in deployment file) --> Redirects to pod port (targetPort in dep file)
+```
+Load balance AWS - Listeners
+> <img width="1431" height="629" alt="image" src="https://github.com/user-attachments/assets/0ccfab17-a929-4f53-ac03-04c0e3f97fe5" />
+
+- networking
+> <img width="1183" height="376" alt="image" src="https://github.com/user-attachments/assets/7e061606-88b2-4e57-ab03-87296bcd04ad" />
+
+- security
+> <img width="1141" height="166" alt="image" src="https://github.com/user-attachments/assets/157415e4-c38c-4f06-bae4-5c7053d2e6c3" />
+
+- health check
+> <img width="1221" height="261" alt="image" src="https://github.com/user-attachments/assets/261919d1-f858-4cea-9128-d17fa492257f" />
+
+- Monitoring
+
+> <img width="1521" height="652" alt="image" src="https://github.com/user-attachments/assets/ab24b6f1-cef8-441e-b6ab-61fd50567c29" />
+
+- Attributes
+
+> <img width="1441" height="538" alt="image" src="https://github.com/user-attachments/assets/55747500-a732-4dfb-8bfd-d560d2c3b6bf" />
+
+- tags
+
+> <img width="1225" height="356" alt="image" src="https://github.com/user-attachments/assets/f37b4d9b-3e7e-4bc2-8bfc-bd8a26660fe0" />
+
+
+- Instances
+
+> <img width="1538" height="288" alt="image" src="https://github.com/user-attachments/assets/55b7bb8e-7978-49c6-a1ab-d5e6bbb69206" />
+
+> <img width="1236" height="207" alt="image" src="https://github.com/user-attachments/assets/6eaf943a-fa73-4ac5-8ad4-5d9ec5c2a603" />
+
+> <img width="1555" height="921" alt="image" src="https://github.com/user-attachments/assets/a4610c1d-e74a-4c33-b706-2af2c9c98b75" />
+
+
+EC2 instances
+
+> <img width="1268" height="783" alt="image" src="https://github.com/user-attachments/assets/ceed67fa-dd9d-43ce-89c6-a1cdb77de95a" />
+
+> <img width="1286" height="538" alt="image" src="https://github.com/user-attachments/assets/3b5726eb-27d2-447a-9667-6c5072fb9ad8" />
+
+> <img width="1279" height="831" alt="image" src="https://github.com/user-attachments/assets/4e332735-8e2b-4b35-8274-d793a672010d" />
+
+> <img width="1265" height="768" alt="image" src="https://github.com/user-attachments/assets/45edda00-e7ad-47cb-94b4-7933cbd61a09" />
+
+> <img width="1534" height="860" alt="image" src="https://github.com/user-attachments/assets/db6ed45f-366d-446d-bf1a-bc7ac0be2393" />
+
+
+
+AWS pods and other should be visible here
+
+> <img width="1398" height="891" alt="image" src="https://github.com/user-attachments/assets/60870c05-88e7-4d00-94a4-541d597804d7" />
+
+
+
+
+
+
 
