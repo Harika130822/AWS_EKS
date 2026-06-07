@@ -1036,6 +1036,8 @@ nginx-deployment-7fcc5d65bb-kn586   1/1     Running   0          7m3s
 Load balance AWS - Listeners
 > <img width="1431" height="629" alt="image" src="https://github.com/user-attachments/assets/0ccfab17-a929-4f53-ac03-04c0e3f97fe5" />
 
+> <img width="1275" height="416" alt="image" src="https://github.com/user-attachments/assets/b4eb9b6a-913b-4691-b5bc-73942158617f" />
+
 - networking
 > <img width="1183" height="376" alt="image" src="https://github.com/user-attachments/assets/7e061606-88b2-4e57-ab03-87296bcd04ad" />
 
