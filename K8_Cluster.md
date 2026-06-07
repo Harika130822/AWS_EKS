@@ -1086,7 +1086,17 @@ AWS pods and other should be visible here
 > <img width="1398" height="891" alt="image" src="https://github.com/user-attachments/assets/60870c05-88e7-4d00-94a4-541d597804d7" />
 
 
-
+- Worker nodes
+```
+PS C:\Users\abhis\Harika\K8s\Class> kubectl get nodes
+NAME                                            STATUS   ROLES    AGE    VERSION
+ip-192-168-25-250.ap-south-1.compute.internal   Ready    <none>   115m   v1.34.8-eks-3385e9b
+ip-192-168-47-101.ap-south-1.compute.internal   Ready    <none>   115m   v1.34.8-eks-3385e9b
+PS C:\Users\abhis\Harika\K8s\Class> kubectl get nodes -n hm8
+NAME                                            STATUS   ROLES    AGE    VERSION
+ip-192-168-25-250.ap-south-1.compute.internal   Ready    <none>   115m   v1.34.8-eks-3385e9b
+ip-192-168-47-101.ap-south-1.compute.internal   Ready    <none>   115m   v1.34.8-eks-3385e9b
+```
 
 
 
