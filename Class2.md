@@ -202,8 +202,14 @@ PS C:\Users\abhis\Harika\K8s\Class2\LearningK8s\sessions\01-core-k8s\subsessions
 service/flask-web-loadbalancer created
 PS C:\Users\abhis\Harika\K8s\Class2\LearningK8s\sessions\01-core-k8s\subsessions\06-flask-services> 
 ```
+> <img width="1575" height="646" alt="image" src="https://github.com/user-attachments/assets/f9a2815d-8602-4e1a-941a-eceb1dd60aca" />
 
 
+<img width="1683" height="890" alt="image" src="https://github.com/user-attachments/assets/967112c4-1529-4ae0-aabb-c517b96ae87c" />
 
 
+<img width="1642" height="343" alt="image" src="https://github.com/user-attachments/assets/9413d612-5156-44f4-b704-21e5ac1265e7" />
+
+
+# Mandatory to run in the back
 eksctl delete cluster --name sample-cluster-cls2 --region ap-south-1
