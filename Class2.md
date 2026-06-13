@@ -210,6 +210,51 @@ PS C:\Users\abhis\Harika\K8s\Class2\LearningK8s\sessions\01-core-k8s\subsessions
 
 <img width="1642" height="343" alt="image" src="https://github.com/user-attachments/assets/9413d612-5156-44f4-b704-21e5ac1265e7" />
 
+```
+PS C:\Users\abhis\Harika\K8s\Class2\LearningK8s> kubectl get svc
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.100.0.1   <none>        443/TCP   110m
+PS C:\Users\abhis\Harika\K8s\Class2\LearningK8s> kubectl get services
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.100.0.1   <none>        443/TCP   113m
+PS C:\Users\abhis\Harika\K8s\Class2\LearningK8s> kubectl config get-context            
+error: unknown command "get-context"
+See 'kubectl config -h' for help and examples
+PS C:\Users\abhis\Harika\K8s\Class2\LearningK8s> kubectl get svc -n app-code
+No resources found in app-code namespace.
+PS C:\Users\abhis\Harika\K8s\Class2\LearningK8s> kubectl get svc -n app-core
+NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP                                                              PORT(S)        AGE
+flask-web-clusterip      ClusterIP      10.100.170.145   <none>                                                                   80/TCP         6m54s
+flask-web-loadbalancer   LoadBalancer   10.100.7.181     ac2cd384f97964fa9a811db1faf3ef76-23462951.ap-south-1.elb.amazonaws.com   80:30854/TCP   6m41s
+flask-web-nodeport       NodePort       10.100.179.9     <none>                                                                   80:30080/TCP   6m47s
+postgres                 ClusterIP      10.100.185.228   <none>                                                                   5432/TCP       7m55s
+PS C:\Users\abhis\Harika\K8s\Class2\LearningK8s> kubectl get pods
+No resources found in default namespace.
+PS C:\Users\abhis\Harika\K8s\Class2\LearningK8s> kubectl get pods -n app-core
+NAME                         READY   STATUS    RESTARTS   AGE
+flask-pod                    1/1     Running   0          9m36s
+flask-web-6b6f976596-b7tdb   1/1     Running   0          9m20s
+flask-web-6b6f976596-stjdm   1/1     Running   0          9m20s
+postgres-5cf755b76f-zzfn6    1/1     Running   0          9m55s
+PS C:\Users\abhis\Harika\K8s\Class2\LearningK8s> kubectl config get-context  
+error: unknown command "get-context"
+See 'kubectl config -h' for help and examples
+PS C:\Users\abhis\Harika\K8s\Class2\LearningK8s> kubectl config get-contexts
+CURRENT   NAME                                                              CLUSTER                                                           AUTHINFO                                                          NAMESPACE
+          admincliprac@sample-cluster-cls2.ap-south-1.eksctl.io             sample-cluster-cls2.ap-south-1.eksctl.io                          admincliprac@sample-cluster-cls2.ap-south-1.eksctl.io             
+          arn:aws:eks:ap-south-1:129373676098:cluster/sample-cluster-3      arn:aws:eks:ap-south-1:129373676098:cluster/sample-cluster-3      arn:aws:eks:ap-south-1:129373676098:cluster/sample-cluster-3      
+*         arn:aws:eks:ap-south-1:129373676098:cluster/sample-cluster-cls2   arn:aws:eks:ap-south-1:129373676098:cluster/sample-cluster-cls2   arn:aws:eks:ap-south-1:129373676098:cluster/sample-cluster-cls2   
+          docker-desktop                                                    docker-desktop                                                    docker-desktop                                                    
+PS C:\Users\abhis\Harika\K8s\Class2\LearningK8s> kubectl get namespaces
+NAME              STATUS   AGE
+app-core          Active   24m
+default           Active   123m
+kube-node-lease   Active   123m
+kube-public       Active   123m
+kube-system       Active   123m
+PS C:\Users\abhis\Harika\K8s\Class2\LearningK8s>
 
-# Mandatory to run in the back
+```
+
+# Mandatory to run in the end
 eksctl delete cluster --name sample-cluster-cls2 --region ap-south-1
