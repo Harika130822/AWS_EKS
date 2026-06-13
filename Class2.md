@@ -205,6 +205,9 @@ PS C:\Users\abhis\Harika\K8s\Class2\LearningK8s\sessions\01-core-k8s\subsessions
 > <img width="1575" height="646" alt="image" src="https://github.com/user-attachments/assets/f9a2815d-8602-4e1a-941a-eceb1dd60aca" />
 
 
+<img width="1539" height="657" alt="image" src="https://github.com/user-attachments/assets/69767e3c-7a3f-4db0-9b6f-3a7c6751faef" />
+
+
 <img width="1683" height="890" alt="image" src="https://github.com/user-attachments/assets/967112c4-1529-4ae0-aabb-c517b96ae87c" />
 
 
