@@ -253,8 +253,126 @@ kube-node-lease   Active   123m
 kube-public       Active   123m
 kube-system       Active   123m
 PS C:\Users\abhis\Harika\K8s\Class2\LearningK8s>
+PS C:\Users\abhis\Harika\K8s\Class2\LearningK8s> kubectl get service flask-web-loadbalancer -n app-core
+NAME                     TYPE           CLUSTER-IP     EXTERNAL-IP                                                              PORT(S)        AGE
+flask-web-loadbalancer   LoadBalancer   10.100.7.181   ac2cd384f97964fa9a811db1faf3ef76-23462951.ap-south-1.elb.amazonaws.com   80:30854/TCP   18m      kubectl config set-context --current --namespace=app-coreC:\Users\abhis\Harika\K8s\Class2\LearningK8s> 
+Context "arn:aws:eks:ap-south-1:129373676098:cluster/sample-cluster-cls2" modified.
+PS C:\Users\abhis\Harika\K8s\Class2\LearningK8s> kubectl config set-context --current --namespace=app-core
+Context "arn:aws:eks:ap-south-1:129373676098:cluster/sample-cluster-cls2" modified.
+PS C:\Users\abhis\Harika\K8s\Class2\LearningK8s> kubectl get services
+NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP                                                              PORT(S)        AGE
+flask-web-clusterip      ClusterIP      10.100.170.145   <none>                                                                   80/TCP         21m
+flask-web-loadbalancer   LoadBalancer   10.100.7.181     ac2cd384f97964fa9a811db1faf3ef76-23462951.ap-south-1.elb.amazonaws.com   80:30854/TCP   21m
+flask-web-nodeport       NodePort       10.100.179.9     <none>                                                                   80:30080/TCP   21m
+postgres                 ClusterIP      10.100.185.228   <none>                                                                   5432/TCP       22m
+PS C:\Users\abhis\Harika\K8s\Class2\LearningK8s> 
+```
+
+<img width="1603" height="730" alt="image" src="https://github.com/user-attachments/assets/a0f6b6e7-fa79-4048-a557-a3e95dbd2bab" />
 
 ```
+PS C:\Users\abhis\Harika\K8s\Class2\LearningK8s> kubectl config set-context --current --namespace=app-core
+Context "arn:aws:eks:ap-south-1:129373676098:cluster/sample-cluster-cls2" modified.
+PS C:\Users\abhis\Harika\K8s\Class2\LearningK8s> kubectl get services
+NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP                                                              PORT(S)        AGE
+flask-web-clusterip      ClusterIP      10.100.170.145   <none>                                                                   80/TCP         21m
+flask-web-loadbalancer   LoadBalancer   10.100.7.181     ac2cd384f97964fa9a811db1faf3ef76-23462951.ap-south-1.elb.amazonaws.com   80:30854/TCP   21m
+flask-web-nodeport       NodePort       10.100.179.9     <none>                                                                   80:30080/TCP   21m
+postgres                 ClusterIP      10.100.185.228   <none>                                                                   5432/TCP       22m
+PS C:\Users\abhis\Harika\K8s\Class2\LearningK8s> kubectl get all -n app-core
+NAME                             READY   STATUS    RESTARTS   AGE
+pod/flask-web-6b6f976596-jsf6z   1/1     Running   0          16m
+pod/flask-web-6b6f976596-z4w6b   1/1     Running   0          16m
+pod/postgres-5cf755b76f-xcbrc    1/1     Running   0          16m
+
+NAME                             TYPE           CLUSTER-IP       EXTERNAL-IP                                                              PORT(S)        AGE
+service/flask-web-clusterip      ClusterIP      10.100.170.145   <none>                                                                   80/TCP         25m
+service/flask-web-loadbalancer   LoadBalancer   10.100.7.181     ac2cd384f97964fa9a811db1faf3ef76-23462951.ap-south-1.elb.amazonaws.com   80:30854/TCP   25m
+service/flask-web-nodeport       NodePort       10.100.179.9     <none>                                                                   80:30080/TCP   25m
+service/postgres                 ClusterIP      10.100.185.228   <none>                                                                   5432/TCP       26m
+
+NAME                        READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/flask-web   2/2     2            2           26m
+deployment.apps/postgres    1/1     1            1           26m
+
+NAME                                   DESIRED   CURRENT   READY   AGE
+replicaset.apps/flask-web-6b6f976596   2         2         2       26m
+replicaset.apps/postgres-5cf755b76f    1         1         1       26m
+PS C:\Users\abhis\Harika\K8s\Class2\LearningK8s> kubectl get configmap -n app-core
+NAME               DATA   AGE
+app-config         2      30m
+kube-root-ca.crt   1      38m
+PS C:\Users\abhis\Harika\K8s\Class2\LearningK8s> kubectl get secret -n app-core   
+NAME          TYPE     DATA   AGE
+app-secrets   Opaque   4      30m
+PS C:\Users\abhis\Harika\K8s\Class2\LearningK8s> kubectl describe configmap app-config -n app-core
+Name:         app-config
+Namespace:    app-core
+Labels:       <none>
+Annotations:  <none>
+
+Data
+====
+DB_HOST:
+----
+postgres
+
+DB_PORT:
+----
+5432
+
+
+BinaryData
+====
+
+Events:  <none>
+PS C:\Users\abhis\Harika\K8s\Class2\LearningK8s> kubectl describe secret app-secrets -n app-core
+Name:         app-secrets
+Namespace:    app-core
+Labels:       <none>
+Annotations:  <none>
+
+Type:  Opaque
+
+Data
+====
+FLASK_SECRET_KEY:   21 bytes
+POSTGRES_DB:        5 bytes
+POSTGRES_PASSWORD:  11 bytes
+POSTGRES_USER:      7 bytes
+PS C:\Users\abhis\Harika\K8s\Class2\LearningK8s> kubectl get deployment -n app-core
+NAME        READY   UP-TO-DATE   AVAILABLE   AGE
+flask-web   2/2     2            2           31m
+postgres    1/1     1            1           32m
+PS C:\Users\abhis\Harika\K8s\Class2\LearningK8s> kubectl get pods -n app-core -l app=postgres
+NAME                        READY   STATUS    RESTARTS   AGE
+postgres-5cf755b76f-xcbrc   1/1     Running   0          21m
+PS C:\Users\abhis\Harika\K8s\Class2\LearningK8s> kubectl get service postgres -n app-core
+NAME       TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+postgres   ClusterIP   10.100.185.228   <none>        5432/TCP   32m
+PS C:\Users\abhis\Harika\K8s\Class2\LearningK8s> kubectl get endpoints postgres -n app-core
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME       ENDPOINTS             AGE
+postgres   192.168.76.244:5432   32m
+PS C:\Users\abhis\Harika\K8s\Class2\LearningK8s> kubectl get pods
+NAME                         READY   STATUS    RESTARTS   AGE
+flask-web-6b6f976596-jsf6z   1/1     Running   0          22m
+flask-web-6b6f976596-z4w6b   1/1     Running   0          22m
+postgres-5cf755b76f-xcbrc    1/1     Running   0          22m
+PS C:\Users\abhis\Harika\K8s\Class2\LearningK8s> kubectl delete pod postgres-5cf755b76f-xcbrc 
+pod "postgres-5cf755b76f-xcbrc" deleted from app-core namespace
+PS C:\Users\abhis\Harika\K8s\Class2\LearningK8s> kubectl get pods                            
+NAME                         READY   STATUS    RESTARTS   AGE
+flask-web-6b6f976596-jsf6z   1/1     Running   0          24m
+flask-web-6b6f976596-z4w6b   1/1     Running   0          24m
+postgres-5cf755b76f-h95hx    1/1     Running   0          48s
+PS C:\Users\abhis\Harika\K8s\Class2\LearningK8s>
+```
+
+<img width="1633" height="778" alt="image" src="https://github.com/user-attachments/assets/eb8b6f0d-86cc-41d7-9d42-da6d40f58e85" />
+
+<img width="1579" height="762" alt="image" src="https://github.com/user-attachments/assets/5d4d8b97-c51b-42d1-9c6d-483fa754dccb" />
+
 
 # Mandatory to run in the end
 eksctl delete cluster --name sample-cluster-cls2 --region ap-south-1
