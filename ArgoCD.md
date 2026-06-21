@@ -1,10 +1,10 @@
 
- 
- 
+ # Pre-requisite to create and EKS cluster
+ ```
  eksctl create cluster --name sample-cluster-cls4 --region ap-south-1 --nodegroup-name standard-workers --node-type t3.medium --nodes 2 --nodes-min 2 --nodes-max 3
 
  eksctl delete cluster --name sample-cluster-cls4 --region ap-south-1
-
+```
 
 
 ```
