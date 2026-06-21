@@ -176,6 +176,7 @@ password
 > <img width="1481" height="1002" alt="image" src="https://github.com/user-attachments/assets/95b05d99-4e2c-4cd4-9325-a29130421a2c" />
 ## commit the deployement.yml changes
 > <img width="815" height="839" alt="image" src="https://github.com/user-attachments/assets/84ad4280-a8f1-42b1-9fc4-74ed758ea8ee" />
+> <img width="1422" height="526" alt="image" src="https://github.com/user-attachments/assets/356624e3-e494-42c1-80f3-6ec2f28528ba" />
 
 
 # CleanUp
@@ -184,8 +185,6 @@ password
 > <img width="1195" height="499" alt="image" src="https://github.com/user-attachments/assets/37ee21a3-c227-4ff7-9f3c-4a553652a247" />
 
 
-
-> <img width="1422" height="526" alt="image" src="https://github.com/user-attachments/assets/356624e3-e494-42c1-80f3-6ec2f28528ba" />
 
 
 ```
