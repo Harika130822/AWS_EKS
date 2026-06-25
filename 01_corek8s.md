@@ -258,6 +258,9 @@ replicaset.apps/postgres-5cf755b76f   1         1         1       5m45s
 ```
 > <img width="1513" height="869" alt="image" src="https://github.com/user-attachments/assets/db1fbd42-389d-4658-9b0c-b590b7712b5f" />
 
+> <img width="1168" height="368" alt="image" src="https://github.com/user-attachments/assets/5c76825f-9eab-47a4-b57b-939101512335" />
+
+
 ## 04 - flask pod
 ```
 PS C:\Users\abhis\Harika\K8s\Practice\LearningK8s\sessions\01-core-k8s\subsessions> kubectl apply -f .\04-flask-pod\                  
