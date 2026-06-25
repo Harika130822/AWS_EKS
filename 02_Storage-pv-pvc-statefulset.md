@@ -411,3 +411,93 @@ PS C:\Users\abhis\Harika\K8s\Practice\LearningK8s\sessions\02-storage-pv-pvc-sta
 > <img width="802" height="498" alt="image" src="https://github.com/user-attachments/assets/2a8efc85-931d-4de8-9696-902e125d44f4" />
 
 
+## Q & A
+🗄️ Why PostgreSQL needs persistent storage
+PostgreSQL is a database, so it must retain data across pod restarts.
+
+If you only use ephemeral container storage, all data vanishes when the pod is rescheduled.
+
+Persistent storage ensures durability of tables, indexes, and transaction logs.
+
+📦 PV vs PVC
+PersistentVolume (PV): The actual storage resource in the cluster (like a disk).
+
+PersistentVolumeClaim (PVC): A request for storage by a pod. It binds to a PV that satisfies its requirements.
+
+Analogy: PV = house, PVC = rental agreement. The pod doesn’t care which house, it just wants one that fits.
+
+🖥️ hostPath: useful but risky
+Useful for learning: Easy to map a directory from the node’s filesystem into a pod. Great for demos on minikube/kind.
+
+Risky in production: Ties data to a specific node. If the pod is rescheduled to another node, the data isn’t there. Also, it bypasses cloud-native storage abstractions and can cause security issues.
+
+⚙️ What a StorageClass adds
+Defines how PVs are provisioned dynamically (e.g., using AWS EBS, GCP Persistent Disk).
+
+Lets you avoid manually creating PVs — PVCs automatically get matched with provisioned volumes.
+
+Adds policies like reclaim behavior, volume type, and parameters for cloud storage.
+
+🏗️ Why StatefulSet fits PostgreSQL better than Deployment
+Deployment: Good for stateless apps, but pods are interchangeable.
+
+StatefulSet: Ensures stable pod identity (ordered names, predictable hostnames) and persistent storage association.
+
+PostgreSQL benefits because each replica needs consistent storage and identity for replication and recovery.
+
+🌐 Why StatefulSet needs a headless Service
+A headless Service (ClusterIP: None) gives each pod a stable DNS entry (podname.servicename.namespace.svc.cluster.local).
+
+This allows clients (and other pods) to connect to specific PostgreSQL instances reliably.
+
+Without it, you’d only get load-balanced access, which isn’t suitable for databases needing direct pod addressing.
+
+🛑 Why StatefulSet PVCs are retained after deletion
+PVCs are not deleted automatically when the StatefulSet is removed.
+
+This prevents accidental data loss — your database files remain safe even if you delete the workload.
+
+You must explicitly delete PVCs if you want to remove the data.
+
+
+PostgreSQL on Kubernetes - Storage & StatefulSet Flow
+```
++-------------------+        +-------------------+
+|   StorageClass    |        |   Headless Service|
+| (defines how PVs  |        | (stable DNS names |
+| are provisioned)  |        | for each pod)     |
++---------+---------+        +---------+---------+
+          |                            |
+          v                            v
++-------------------+        +-------------------+
+| PersistentVolume  |        |   StatefulSet     |
+| (actual disk)     |<------>| (stable identity, |
++---------+---------+        | ordered pods,     |
+          ^                  | attaches PVCs)    |
+          |                  +---------+---------+
++-------------------+                  |
+| PersistentVolume  |<-----------------+
+| Claim (PVC)       |   binds to PV
+| (pod’s request)   |
++---------+---------+
+          |
+          v
++-------------------+
+| PostgreSQL Pod    |
+| (uses PVC for DB  |
+| data persistence) |
++-------------------+
+```
+
+### Key Takeaways
+StorageClass → PVs: Automates provisioning of storage.
+
+PVC → PV: Pods request storage; Kubernetes binds them.
+
+StatefulSet → PVCs: Each pod gets its own PVC, ensuring data sticks with the pod identity.
+
+Headless Service → DNS: Provides stable network identity for each PostgreSQL replica.
+
+PVC Retention: Even if the StatefulSet is deleted, PVCs remain to protect your data.
+
+
