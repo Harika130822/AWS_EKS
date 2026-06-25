@@ -519,6 +519,7 @@ PS C:\Users\abhis\Harika\K8s\Practice\LearningK8s\sessions\01-core-k8s\subsessio
 #If the Flask service has no endpoints, check Deployment Pod labels and Service selectors.
 ```
 
+> <img width="1159" height="609" alt="image" src="https://github.com/user-attachments/assets/7a0d8b97-2c75-4ae5-be81-77490d617183" />
 
 
 ## Q&A 
