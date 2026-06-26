@@ -25,6 +25,7 @@ PS C:\Users\abhis\Harika\K8s\Practice\LearningK8s\sessions\01-core-k8s\subsessio
 ```
 > <img width="669" height="50" alt="image" src="https://github.com/user-attachments/assets/2b8ea0a1-f0da-4a79-bd5a-8def9e059132" />
 
+> <img width="420" height="51" alt="image" src="https://github.com/user-attachments/assets/0dbabda8-831b-46f6-9ce4-6b89f967f86b" />
 
 
 ## 02 - configmap and secrets
