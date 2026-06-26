@@ -6,6 +6,9 @@ Must do at the end
 eksctl delete cluster --name prac-cluster --region ap-south-1
 eksctl create cluster --name prac-cluster --region ap-south-1 --nodegroup-name standard-workers --node-type t3.medium --nodes 2 --nodes-min 2 --nodes-max 3
 aws eks --region ap-south-1 update-kubeconfig --name prac-cluster
+
+#others
+kubectl get svc
 ```
 
 ## 01-namespace
