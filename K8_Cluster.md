@@ -5,6 +5,7 @@ Kubernetes
 # EKS Deployment
 
 pre-requisites
+WSL, Docker Desktop
 
 # Powershell
 ```
@@ -894,6 +895,7 @@ cloudformation
   }
 }
 ```
+> <img width="1098" height="336" alt="image" src="https://github.com/user-attachments/assets/1ace2eaf-9643-4d81-ae4e-8d8ee6f7eeb5" />
 
 get context of which cluster you are mapped currently - Docker or AWS
 ```
