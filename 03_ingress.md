@@ -664,6 +664,9 @@ PS C:\Users\abhis\Harika\K8s\Practice\LearningK8s\sessions\03-ingress>
 
 > <img width="1104" height="178" alt="image" src="https://github.com/user-attachments/assets/fd3a5cc2-6ee2-49dd-8d57-2d76f3cd67fa" />
 
+> <img width="1103" height="277" alt="image" src="https://github.com/user-attachments/assets/64f8c265-053e-4ab5-bf08-315462a41d70" />
+
+
 
 
 
