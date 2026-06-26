@@ -82,6 +82,7 @@ PS C:\Users\abhis\Harika\K8s\Practice\LearningK8s\sessions\01-core-k8s\subsessio
 No resources found in app-core namespace.
 PS C:\Users\abhis\Harika\K8s\Practice\LearningK8s\sessions\01-core-k8s\subsessions> 
 ```
+> <img width="637" height="341" alt="image" src="https://github.com/user-attachments/assets/8d6b30c6-bc0e-4690-8290-9cd5f06aedbc" />
 
 ## 03 - Kind - Deployment and Services
 ```
