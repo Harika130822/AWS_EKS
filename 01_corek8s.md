@@ -8,7 +8,7 @@ eksctl create cluster --name prac-cluster --region ap-south-1 --nodegroup-name s
 aws eks --region ap-south-1 update-kubeconfig --name prac-cluster
 
 #others
-kubectl get svc
+kubectl get svc -n app-core
 ```
 
 ## 01-namespace
