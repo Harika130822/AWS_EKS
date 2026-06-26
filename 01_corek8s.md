@@ -23,6 +23,9 @@ PS C:\Users\abhis\Harika\K8s\Practice\LearningK8s\sessions\01-core-k8s\subsessio
 No resources found in app-core namespace.
 PS C:\Users\abhis\Harika\K8s\Practice\LearningK8s\sessions\01-core-k8s\subsessions>
 ```
+> <img width="669" height="50" alt="image" src="https://github.com/user-attachments/assets/2b8ea0a1-f0da-4a79-bd5a-8def9e059132" />
+
+
 
 ## 02 - configmap and secrets
 ```
