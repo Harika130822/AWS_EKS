@@ -28,7 +28,7 @@ cd ..
 
 helm package .\sampleapp\ //save package as tgz file and then install in other system to run same package "sampleapp-0.1.0.tgz". this name came from Chart.y
 
-
+helm upgrade --install sampleapp . -n dev --createnamespace -f values-dev.yml --wait --atomic
 ```
 
 
